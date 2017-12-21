@@ -1,5 +1,6 @@
 # mdccERP
-本项目为一个极简单的ERP系统,纯粹用于学习,采用nodejs+mysql+webpack+react+react-native,为主要框架;共有3个服务;分别为服务端,web前端,app(暂未开发)
+### 本项目为一个极简单的ERP系统,纯粹用于学习,采用nodejs+mysql+webpack+react+react-native为主要框架;
+### 共有3个服务;分别为服务端,web前端,app(暂未开发)
 
 
 
@@ -17,4 +18,4 @@ server/DBInit.sql为适合本项目对应库和表的初始化语句
 对应的api文档和数据字典文档路径为:
 https://www.showdoc.cc/1681582?page_id=15722111
 
-## 未完待续...
+# 未完待续...

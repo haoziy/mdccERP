@@ -4,7 +4,7 @@
 //const
 
 
-const _dev = require('./server.config.js')
+const {_dev,_port}= require('./server.config.js')
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
@@ -233,7 +233,7 @@ app.all('*',(req,res)=>{
 
 
 
-app.listen(9527, function (x) {
+app.listen(_port?_port:9527, function (x) {
     console.log('Example app listening on port 9527!')
 })
 

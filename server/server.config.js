@@ -4,4 +4,8 @@
 
 
 const _dev = true;
-module.exports = _dev;
+const _port = 9527;
+module.exports = {
+    _dev,
+    _port
+};
