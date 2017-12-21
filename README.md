@@ -13,7 +13,7 @@
 ### node服务端启动命令为 npm start 同理也可通过查看package.json script部分来查看启动命令
 ### app 端暂未开发;
 
-#服务端配置文件
+# 服务端配置文件
 ### server/server.config.js为服务配置文件;用于处理服务器的配置;比如是否开发者模式需要打印日志;启动端口等;
 ### server/DBConfig.js为对应的数据库配置;
 ### server/DBInit.sql为适合本项目对应库和表的初始化语句
