@@ -14,12 +14,24 @@ const {
     addChannel
     } = require('./channel')
 
-
+const {
+    addStaff,
+    getAllStaff
+    }  = require('./staff')
+const {
+    addCustomer,
+    getAllCustomer,
+    updateCustomerStatus,
+    bindCustomerAndSegment,
+    bindCustomerAndStaff,
+    bindCustomerAndChannel
+    } = require('./customer')
 const db = require('./DBConfig')
 const  API_MAP = {
     //用户相关
     addCustomer:'/customer/addCustomer',//添加用户
     editCustomer:'/customer/editCustomer',//编辑用户
+    updateCustomerStatus:'/customer/updateCustomerStatus',//更新用户状态
     deleteCustomer:'/customer/deleteCustomer',//删除用户
     getAllCustomer:'/customer/getAllCustomer',//获取所有用户
 
@@ -34,6 +46,9 @@ const  API_MAP = {
     deleteStaff:'/staff/delteStaff',//删除员工
     editStaff:'/staff/editStaff',//添加员工
     getAllStaff:'/staff/getAllStaff',//获取所有员工信息
+
+    addTimeSegment:'/segment/addSegment',//添加时段
+    getAllSegment:'/segment/getAllSegment',//获取时段
 }
 const STATUS_CODE = {
     SUCCESS:0,//成功回调
@@ -81,6 +96,75 @@ const httCallBack = function(req,res){
                 }
             })
             break;
+        case API_MAP.updateCustomerStatus:
+            let param = req.objs;
+            const{customerId,status}  = param
+            if(!customerId||!status)
+            {
+                res.send(packageData(STATUS_CODE.CUSTOMER_PARAM_ERROR,req.path,null))
+            }else {
+                let sqlParam =  [customerId,status]
+
+                sqlExecute(updateCustomerStatus(),null,(result)=>{
+                    if(result)
+                    {
+                        res.send(packageData(STATUS_CODE.SUCCESS,req.path,result))
+                    }else
+                    {
+                        res.send(packageData(STATUS_CODE.SERVER_ERROR,req.path,null))
+                    }
+                })
+            }
+            break;
+        case API_MAP.addCustomer:
+            let param = req.objs;
+            const{customerName,customerTelephone,staffId,segmentId,channelId}  = param
+            if(customerName&&customerTelephone&&staffId&&segmentId&&channelId)
+            {
+                let customerId = getUuid();
+                const customerParam = [customerId,customerName,customerTelephone];
+                const bindCustomerAndStaffParam = [getUuid(),staffId,customerId];
+                const bindCustomerAndChannelParam = [getUuid(),channelId,customerId];
+                const bindCustomerAndSegmentParam = [getUuid(),segmentId,customerId];
+
+
+                var doSometing = async function (){
+                    var f1 = await sqlExecute(addCustomer(),customerParam,(val1)=>{
+
+                    });
+                    var f2 = await sqlExecute(bindCustomerAndChannel(),bindCustomerAndChannelParam,(val1)=>{
+
+                    });
+                    var f3 = await sqlExecute(bindCustomerAndSegment(),bindCustomerAndSegmentParam,(val1)=>{
+
+                    });
+                    var f3 = await sqlExecute(bindCustomerAndStaff(),bindCustomerAndStaffParam,(val1)=>{
+
+                    });
+
+                };
+                new Promise().then(()=>sqlExecute(bindCustomerAndChannel(),bindCustomerAndChannelParam,(val2)=>{
+
+                },(val2)=>{
+
+                }),(failed)=>{},(wait)=>{})
+
+
+                let sqlParam =  [customerName,customerTelephone,staffId,segmentId,channelId]
+
+                sqlExecute(addCustomer(),sqlParam,null,(result)=>{
+                    if(result)
+                    {
+                        res.send(packageData(STATUS_CODE.SUCCESS,req.path,result))
+                    }else
+                    {
+                        res.send(packageData(STATUS_CODE.SERVER_ERROR,req.path,null))
+                    }
+                })
+            }else {
+                res.send(packageData(STATUS_CODE.CUSTOMER_PARAM_ERROR,req.path,null))
+            }
+            break;
         case API_MAP.getAllChannel:
             sqlExecute(getAllChannel(),null,(result)=>{
                 if(result)
@@ -94,10 +178,10 @@ const httCallBack = function(req,res){
             break;
         case API_MAP.addChannel:
             let param = req.objs;
-            const{channelName,descrpition}  = param
+            const{name,descrpition}  = param
             console.log(param);
-            let sqlParam =  [getUuid(),channelName,descrpition]
-            if(!channelName)
+            let sqlParam =  [getUuid(),name,descrpition]
+            if(!name)
             {
                 res.send(packageData(STATUS_CODE.CHANNEL_PARAM_ERROR,req.path,null))
             }else {
@@ -111,6 +195,37 @@ const httCallBack = function(req,res){
                     }
                 })
             }
+            break;
+        case API_MAP.addStaff:
+            let param = req.objs;
+            const{name,telephone}  = param
+            console.log(param);
+            let sqlParam =  [getUuid(),name,telephone]
+            if(!name)
+            {
+                res.send(packageData(STATUS_CODE.STAFF_PARAM_ERROR,req.path,null))
+            }else {
+                sqlExecute(addStaff(),sqlParam,(result)=>{
+                    if(result)
+                    {
+                        res.send(packageData(STATUS_CODE.SUCCESS,req.path,null))
+                    }else
+                    {
+                        res.send(packageData(STATUS_CODE.SERVER_ERROR,req.path,null))
+                    }
+                })
+            }
+            break;
+        case API_MAP.getAllStaff:
+            sqlExecute(getAllStaff(),(result)=>{
+                if(result)
+                {
+                    res.send(packageData(STATUS_CODE.SUCCESS,req.path,null))
+                }else
+                {
+                    res.send(packageData(STATUS_CODE.SERVER_ERROR,req.path,null))
+                }
+            })
             break;
         default:
             res.status(404).end();
@@ -130,7 +245,9 @@ const sqlExecute = function(sql,param,callBack){
         if(param)
         {
             connect.query(sql,param,(err,result)=>{
-                console.log(sql);
+                if(_dev){
+                    console.log(sql);
+                }
                 if(err){
                     callBack(null);
                 }else {
@@ -139,7 +256,9 @@ const sqlExecute = function(sql,param,callBack){
             })
         }else {
             connect.query(sql,(err,result)=>{
-                console.log(sql);
+                if(_dev){
+                    console.log(sql);
+                }
                 if(err){
                     callBack(null);
                 }else {
