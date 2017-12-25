@@ -23,7 +23,8 @@ module.exports = {
     // loaders
     module: {
         rules: [
-            {test: /\.jsx?$/, use: ['babel-loader'], exclude: /node_modules/}
+            {test: /\.jsx?$/, use: ['babel-loader'], exclude: /node_modules/},
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
         ]
 
     },

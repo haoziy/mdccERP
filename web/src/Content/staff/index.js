@@ -5,7 +5,7 @@
 import {Table} from 'antd'
 import React, {Component} from 'react'
 
-export  default class ChannelViewController extends Component
+export  default class StaffViewController extends Component
 {
     render()
     {
@@ -15,19 +15,34 @@ export  default class ChannelViewController extends Component
 
 const dataSource = [{
     key: '1',
-    name: '网络',
+    name: '胡彦斌',
+    age: 32,
+    address: '西湖区湖底公园1号',
+    phone:1233213213,
+    status:1,
 }, {
     key: '2',
     name: '胡彦祖',
+    age: 42,
+    address: '西湖区湖底公园1号',
+    phone:1233213213,
+    status:1,
 }];
 
 const columns = [{
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
-}];
+}, {
+    title: '电话',
+    dataIndex: 'phone',
+    key: 'phone',
+}, {
+    title: '状态',
+    dataIndex: 'status',
+    key: 'status',
+}
+];
 
 <Table dataSource={dataSource} columns={columns} />
-/**
- * Created by shenqiao on 2017/12/24.
- */
+
