@@ -8,7 +8,6 @@
     "build": "babel --presets react src --out-dir build --watch",
     "web": "webpack-dev-server --config webpack.dev.js",
     "start": "node ./server/index.js"
-
   },
   "author": "",
   "license": "ISC",
