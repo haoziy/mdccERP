@@ -5,12 +5,17 @@
  * Created by shenqiao on 2017/12/20.
  */
 
-import {Menu,SubMenu} from 'antd'
+import {Menu} from 'antd'
 import React, {Component} from 'react'
 import Top from './Top'
 import Buttom from './Bottom'
 import Channel from './Content/channel'
 import { Layout ,Breadcrumb} from 'antd';
+import { Button } from 'antd';
+import CustomerViewController from './Content/customer'
+import ChannelViewController from './Content/channel'
+import SegmentViewController from './Content/segment'
+import StaffViewController from './Content/staff'
 const { Header, Footer, Sider, Content } = Layout;
 const menu = [
     '客户管理',
@@ -28,108 +33,57 @@ export default class Container extends Component {
         }
     }
     render() {
+        console.log(this.state.currentIndex);
         return (
-            <Layout className="layout">
-                <Header>
-                    <Menu
-                        theme="dark"
-                        mode="horizontal"
-                        defaultSelectedKeys={['2']}
-                        style={{ lineHeight: '64px' }}
-                    >
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
-                    </Menu>
-                </Header>
-                <Content style={{ padding: '0 50px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div>
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©2016 Created by Ant UED
-                </Footer>
-            </Layout>
+            <div style={{flex:1,flexDirection:'column',alignContent:'space-between'}}>
+                <Top name="老米"/>
+                <div style={{flex:1,flexDirection:'column'}}>
+                    <div style={{flex:1,flexDirection:'row',display:'flex'}}>
+                        {this.menuPart()}
+                        <div style={{flex:1,alignContent:'flex-end',}}>
+                            {this.content(this.state.currentIndex)}
+                        </div>
+
+                    </div>
+                </div>
+                <Buttom/>
+            </div>
+
+
         )
     }
-
-
-    //render() {
-    //    return (
-    //        <div style={{flex:1,flexDirection: 'column'}}>
-    //            <div style={{flex:1,flexDirection:'column',alignContent:'space-between'}}>
-    //                <Top name="老米"/>
-    //                <div style={{flex:1,flexDirection:'column'}}>
-    //                    <div style={{flex:1,flexDirection:'row',display:'flex'}}>
-    //                        {this.menuPart()}
-    //                        <div style={{flex:1,alignContent:'flex-end',}}>
-    //                            {this.content(this.state.currentIndex)}
-    //                        </div>
-    //
-    //                    </div>
-    //
-    //                </div>
-    //                <Buttom/>
-    //            </div>
-    //        </div>
-    //
-    //    )
-    //}
     menuPart() {
 
         return (
-            <Menu>
-                <Menu.Item>菜单项</Menu.Item>
-                <Menu.Item>菜单项</Menu.Item>
-                <Menu.Item>菜单项</Menu.Item>
-                <Menu.Item>菜单项</Menu.Item>
-                <Menu.Item>菜单项</Menu.Item>
-                <Menu.Item>菜单项</Menu.Item>
+            <Menu defaultSelectedKeys = {['1']} style={{width:150}} theme='dark' onClick={(item)=>this.setState({currentIndex:item.key})}>
+                {
+                    menu.map((x,i)=>{
+                        return (<Menu.Item key={i+1}>{x}</Menu.Item>)
+                    })
+                }
             </Menu>
         )
-        //return (
-        //    <div style={{width:150}}>
-        //        {menu.map((k, i)=> {
-        //            return (
-        //                <div key={i} style={{paddingLeft:10,height:44,borderBottom:'1px solid #000'}}
-        //                     onClick={()=>this.setState({currentIndex:1+i})}>
-        //                    <p>{k}</p>
-        //                </div>
-        //            )
-        //        })}
-        //    </div>
-        //
-        //)
     }
 
     content(index) {
-        //<div style={{flex:1,backgroundColor:'#0FF',display: 'flex'}}>
-        //
-        //</div>
-        switch (index) {
+        switch (parseInt(index)) {
             case 1:
                 return (<div>
-                    <p>{index}</p>
+                    <CustomerViewController/>
                 </div>)
                 break;
             case 2:
                 return (<div>
-                    <p>{index}</p>
+                    <SegmentViewController />
                 </div>)
                 break;
             case 3:
                 return (<div>
-                    <Channel/>
+                    <ChannelViewController />
                 </div>)
                 break;
             case 4:
-                return (<div>
-                    <p>{index}</p>
-                </div>)
+                return (<StaffViewController />)
                 break;
             default:
                 return null
