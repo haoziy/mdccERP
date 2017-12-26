@@ -2,6 +2,7 @@
  * Created by shenqiao on 2017/12/23.
  */
 const axios = require('axios');
+//axios.defaults.headers.post['Access-Control-Allow-Origin']='http://localhost:8080';
 const API_MAP = {
     //用户相关
     addCustomer: '/customer/addCustomer',//添加用户

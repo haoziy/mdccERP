@@ -1,10 +1,19 @@
-/**
- * Created by shenqiao on 2017/12/23.
- */
+import {BaseHandler,API_MAP} from '../index'
 
-const BaseHandler = require('../index');
-
-export default class ChannelHandler extends BaseHandler
+export const ChannelHandler =
 {
+    getAllChannel:(success,failed)=>{
+        BaseHandler.postHttpRequest(
+            BaseHandler.customUrlAndApi(BaseHandler.baseURL,API_MAP.getAllChannel),
+            {},
+            (successData)=>{
+                let data = successData.data;
+                success(data)
+            },
+            (failedData)=>{
+
+            }
+        )
+    }
 
 }
