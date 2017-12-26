@@ -16,7 +16,10 @@ import CustomerViewController from './Content/customer'
 import ChannelViewController from './Content/channel'
 import SegmentViewController from './Content/segment'
 import StaffViewController from './Content/staff'
-const { Header, Footer, Sider, Content } = Layout;
+import {CustomerHandler} from './HttpRequest/CustomerHandler'
+import {StaffHandler} from './HttpRequest/StaffHandler'
+import {ChannelHandler} from './HttpRequest/ChannelHandler'
+import {SegmentHandler} from './HttpRequest/SegmentHandler'
 const menu = [
     '客户管理',
     '分段管理',
@@ -30,6 +33,10 @@ export default class Container extends Component {
 
         this.state = {
             currentIndex: 1,//单页应用;表示当前展示是那一页的内容
+            customer:[],
+            staff:[],
+            channel:[],
+            segment:[],
         }
     }
     render() {
@@ -43,7 +50,6 @@ export default class Container extends Component {
                         <div style={{flex:1,alignContent:'flex-end',}}>
                             {this.content(this.state.currentIndex)}
                         </div>
-
                     </div>
                 </div>
                 <Buttom/>
@@ -64,12 +70,52 @@ export default class Container extends Component {
             </Menu>
         )
     }
+    componentDidMount()
+    {
+        this.loadData();
+    }
+    loadData()
+    {
+        CustomerHandler.getAllCustomer((data)=>{
+            this.setState({
+                customer:data
+            })
+        },(faile)=>{
 
+        })
+        StaffHandler.getAllStaff((data)=>{
+            this.setState({
+                staff:data
+            })
+        },(faile)=>{
+
+        })
+        ChannelHandler.getAllChannel((data)=>{
+            this.setState({
+                channel:data
+            })
+        },(faile)=>{
+
+        })
+        SegmentHandler.getAllSegment((data)=>{
+            this.setState({
+                segment:data
+            })
+        },(faile)=>{
+
+        })
+
+    }
     content(index) {
         switch (parseInt(index)) {
             case 1:
                 return (<div>
-                    <CustomerViewController/>
+                    <CustomerViewController
+                        customer={this.state.customer?this.state.customer:[]}
+                        staff={this.state.staff?this.state.staff:[]}
+                        channel={this.state.channel?this.state.channel:[]}
+                        segment={this.state.segment?this.state.segment:[]}
+                    />
                 </div>)
                 break;
             case 2:

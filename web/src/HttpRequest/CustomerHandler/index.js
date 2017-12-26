@@ -12,9 +12,7 @@ export const CustomerHandler =
             {},
             (successData)=>{
                 let data = successData.data;
-                success(data.map((item,i)=>{
-                    //return {name:item.cutomerName,...item};
-                }))
+                success(data&&data.data?data.data:[])
             },
             (failedData)=>{
 

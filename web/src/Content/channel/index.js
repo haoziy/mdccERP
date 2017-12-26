@@ -11,18 +11,21 @@ export  default class ChannelViewController extends Component
     {
         super(props)
         this.state = {
-            dataSource:[],
-            columns:[
-                [{
-                    title: '姓名',
-                    dataIndex: 'name',
-                    key: 'name',
-                }, {
-                    title: '渠道',
-                    dataIndex: 'channel',
-                    key: 'channel',
+            dataSource:[
+                {
+                    key: '1',
+                    name: '胡彦斌',
+                    age: 32,
+                    channelName: '西湖区湖底公园1号'
                 }
-                ]
+            ],
+            columns:[
+                {
+                    title: '渠道名称',
+                    dataIndex: 'channelName',
+                    key: 'name',
+                },
+
             ]
         }
     }
@@ -45,7 +48,3 @@ export  default class ChannelViewController extends Component
         })
     }
 }
-
-/**
- * Created by shenqiao on 2017/12/24.
- */
