@@ -5,6 +5,8 @@ const path = require('path')
 const root = __dirname + '/web'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const proxy = require('http-proxy-middleware')
+const context = ['/channel/**', '/customer/**'];//解决跨域问题
 console.log(root);
 module.exports = {
     // 入口文件
@@ -38,6 +40,13 @@ module.exports = {
         contentBase: path.resolve(root, 'dist'),
         publicPath: '/',
         port: 8080,
-        historyApiFallback: true
+        historyApiFallback: true,
+        //proxy: [
+        //    {
+        //        context: context,
+        //        target: 'http://localhost:9527',
+        //        secure: false
+        //    }
+        //]
     }
 }
