@@ -186,9 +186,9 @@ const httCallBack = (req, res)=> {
         }
             break;
         case API_MAP.getAllStaff:
-            sqlExecute(getAllStaff(), (result)=> {
+            sqlExecute(getAllStaff(),null, (result)=> {
                 if (result) {
-                    res.send(packageData(STATUS_CODE.SUCCESS, req.path, null))
+                    res.send(packageData(STATUS_CODE.SUCCESS, req.path, result))
                 } else {
                     res.send(packageData(STATUS_CODE.SERVER_ERROR, req.path, null))
                 }
@@ -211,12 +211,12 @@ const sqlExecute = (sql, param, callBack)=> {
     db.con(connect=> {
         if (param) {
             connect.query(sql, param, (err, result)=> {
-                err && console.log(sql);
+                err && console.log(err);
                 callBack && callBack(err ? null : result)
             })
         } else {
             connect.query(sql, (err, result)=> {
-                err && console.log(sql);
+                err && console.log(err);
                 callBack && callBack(err ? null : result)
             })
         }
