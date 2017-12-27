@@ -19,7 +19,7 @@ const API_MAP = {
 
     //员工相关
     addStaff: '/staff/addStaff',//添加员工
-    deleteStaff: '/staff/delteStaff',//删除员工
+    deleteStaff: '/staff/deleteStaff',//删除员工
     editStaff: '/staff/editStaff',//添加员工
     getAllStaff: '/staff/getAllStaff',//获取所有员工信息
 
