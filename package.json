@@ -32,6 +32,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "mysql": "^2.15.0",
+    "promise-polyfill": "^7.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "style-loader": "^0.19.1"

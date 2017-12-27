@@ -6,6 +6,12 @@ var bodyParser = require('body-parser')
 var app = express()
 const root = __dirname
 
+// 将Promise抛出为全局对象
+window.Promise = Promise
+// const polyfill = require('promise-polyfill');
+// import "babel-polyfill";//这里不知道该要不要
+
+
 app.all('*', (req, res,next)=> {
     res.sendFile('../template.html',{root:root}).end();
 })

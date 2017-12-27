@@ -6,7 +6,7 @@ const root = __dirname + '/web'
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const proxy = require('http-proxy-middleware')
-const context = ['/channel/**', '/customer/**'];//解决跨域问题
+const context = ['/channel/**', '/customer/**']; //解决跨域问题
 console.log(root);
 module.exports = {
     // 入口文件
@@ -17,6 +17,7 @@ module.exports = {
     //    path.resolve(root, 'src/main.js')
     //],
     entry: path.resolve(root, 'src/main.js'),
+    entry:["babel-polyfill","./web/src/main.js"],//解决ie11promise未定义的问题
     // 出口文件
     output: {
         filename: 'bundle.js',
@@ -24,9 +25,15 @@ module.exports = {
     },
     // loaders
     module: {
-        rules: [
-            {test: /\.jsx?$/, use: ['babel-loader'], exclude: /node_modules/},
-            {test: /\.css$/, loader: 'style-loader!css-loader'},
+        rules: [{
+                test: /\.jsx?$/,
+                use: ['babel-loader'],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            },
         ]
 
     },
