@@ -24,7 +24,7 @@ const menu = [
     '客户管理',
     '分段管理',
     '渠道管理',
-    '员工管理',
+    '员工管理'
 ]
 
 export default class Container extends Component {
@@ -42,17 +42,17 @@ export default class Container extends Component {
     render() {
         console.log(this.state.currentIndex);
         return (
-            <div style={{flex:1,flexDirection:'column',alignContent:'space-between'}}>
+            <div style={{flex:1,display:'flex',flexDirection:'column',alignContent:'space-between',minHeight:'100%'}}>
                 <Top name="老米"/>
-                <div style={{flex:1,flexDirection:'column'}}>
-                    <div style={{flex:1,flexDirection:'row',display:'flex'}}>
+                <div style={{flex:1,boxFlex:1,flexDirection:'row',display:'-webkit-flex',diaplsy:'flex',alignItems:"stretch"}}>
+                    <div style={{alignItems:"stretch"}}>
                         {this.menuPart()}
-                        <div style={{flex:1,alignContent:'flex-end',}}>
-                            {this.content(this.state.currentIndex)}
-                        </div>
                     </div>
-                </div>
-                <Buttom/>
+                    <div style={{flex:1,alignContent:'flex-end',alignItems:"stretch"}}>
+                         {this.content(this.state.currentIndex)}
+                     </div>
+                 </div>
+                <Buttom style={{alignSelf:'flex-end',display:'flex'}}/>
             </div>
 
 
