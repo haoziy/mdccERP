@@ -46,11 +46,11 @@ export  default class CustomerViewController extends Component {
                     onOk={()=>this.setState({visible:false})}
                     onCancel={()=>this.setState({visible:false})}
                 >
-                    <h5>客户姓名</h5>
+                    <h5><span>客户姓名</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <Input placeholder="客户姓名" />
-                    <h5>客户电话</h5>
+                    <h5><span>客户电话</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <Input placeholder="客户电话" />
-                    <h5>渠道 ▽</h5>
+                    <h5><span>渠道</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({channel:v})}}>
                             {
@@ -62,7 +62,7 @@ export  default class CustomerViewController extends Component {
                             }
                         </Select>
                     </div>
-                    <h5>接待员工 ▽</h5>
+                    <h5><span>接待员工</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({staff:v})}}>
                             {
@@ -74,7 +74,7 @@ export  default class CustomerViewController extends Component {
                             }
                         </Select>
                     </div>
-                    <h5>时段 ▽</h5>
+                    <h5><span>时段</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({segment:v})}}>
                             {
