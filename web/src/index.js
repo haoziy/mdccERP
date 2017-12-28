@@ -7,7 +7,9 @@ var app = express()
 const root = __dirname
 
 // 将Promise抛出为全局对象
-window.Promise = Promise
+// window.Promise = Promise
+
+const Promise = require('babel-runtime/core-js/promise') || new Promise();
 // const polyfill = require('promise-polyfill');
 // import "babel-polyfill";//这里不知道该要不要
 
