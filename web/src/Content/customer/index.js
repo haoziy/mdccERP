@@ -2,7 +2,7 @@
  * Created by shenqiao on 2017/12/23.
  */
 
-import {Table,Button,Modal,Input,Select} from 'antd'
+import {Table,Button,Modal,Input,Select,Alert} from 'antd'
 import React, {Component} from 'react'
 import {CustomerHandler} from '../../HttpRequest/CustomerHandler'
 
@@ -33,7 +33,8 @@ export  default class CustomerViewController extends Component {
                 dataIndex: 'segment',
                 key: 'segment',
             }
-            ]
+            ],
+            isCanSubmit:false,
         }
     }
     model()
@@ -46,11 +47,11 @@ export  default class CustomerViewController extends Component {
                     onOk={()=>this.setState({visible:false})}
                     onCancel={()=>this.setState({visible:false})}
                 >
-                    <h5>客户姓名</h5>
+                    <h5>客户姓名 ※</h5>
                     <Input placeholder="客户姓名" />
-                    <h5>客户电话</h5>
+                    <h5>客户电话 ※</h5>
                     <Input placeholder="客户电话" />
-                    <h5>渠道 ▽</h5>
+                    <h5>渠道 ※</h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({channel:v})}}>
                             {
@@ -62,7 +63,7 @@ export  default class CustomerViewController extends Component {
                             }
                         </Select>
                     </div>
-                    <h5>接待员工 ▽</h5>
+                    <h5>接待员工 ※</h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({staff:v})}}>
                             {
@@ -74,8 +75,8 @@ export  default class CustomerViewController extends Component {
                             }
                         </Select>
                     </div>
-                    <h5>时段 ▽</h5>
-                    <div>
+                    <h5>时段 ※</h5>
+                    <div style={{marginBottom:5}}>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({segment:v})}}>
                             {
                                 this.props.segment.map((v,i)=>{
@@ -86,6 +87,14 @@ export  default class CustomerViewController extends Component {
                             }
                         </Select>
                     </div>
+                    {
+                        !this.state.isCanSubmit&&<Alert
+                            message="提示"
+                            description="带'※'为必填项"
+                            type="warning"
+                        />
+                    }
+
                 </Modal>
             </div>
         )
