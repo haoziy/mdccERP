@@ -45,7 +45,7 @@ export default class Container extends Component {
             <div style={{flex:1,display:'flex',flexDirection:'column',alignContent:'space-between',minHeight:'100%'}}>
                 <Top name="老米"/>
                 <div style={{flex:1,boxFlex:1,flexDirection:'row',display:'-webkit-flex',diaplsy:'flex',alignItems:"stretch"}}>
-                    <div style={{alignItems:"stretch"}}>
+                    <div style={{alignItems:"stretch",backgroundColor:'#001529',color:'#fff!important'}}>
                         {this.menuPart()}
                     </div>
                     <div style={{flex:1,alignContent:'flex-end',alignItems:"stretch"}}>
