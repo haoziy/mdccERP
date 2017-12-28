@@ -49,9 +49,9 @@ export  default class CustomerViewController extends Component {
                 >
 
                     <h5><span>客户姓名</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
-                    <Input placeholder="客户姓名" />
+                    <Input placeholder="客户姓名" name="customerName"/>
                     <h5><span>客户电话</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
-                    <Input placeholder="客户电话" />
+                    <Input placeholder="客户电话" name="customerPhone"/>
                     <h5><span>渠道</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({channel:v})}}>
