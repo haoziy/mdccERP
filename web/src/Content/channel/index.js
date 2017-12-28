@@ -2,7 +2,7 @@
  * Created by shenqiao on 2017/12/23.
  */
 
-import {Table} from 'antd'
+import {Table,Button} from 'antd'
 import React, {Component} from 'react'
 import {ChannelHandler} from '../../HttpRequest/ChannelHandler'
 export  default class ChannelViewController extends Component
@@ -31,7 +31,15 @@ export  default class ChannelViewController extends Component
     }
     render()
     {
-        return ( <Table dataSource={this.state.dataSource} columns={this.state.columns} />)
+        return ( 
+            <div style={{margin:10}}>
+                <div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
+                    <h3>渠道名称</h3>
+                    <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
+                </div>
+                <Table dataSource={this.state.dataSource} columns={this.state.columns} />
+            </div>
+    )
     }
     componentDidMount()
     {

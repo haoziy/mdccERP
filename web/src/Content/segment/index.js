@@ -2,14 +2,26 @@
  * Created by shenqiao on 2017/12/23.
  */
 
-import {Table} from 'antd'
+import {Table,Button} from 'antd'
 import React, {Component} from 'react'
 
 export  default class SegmentViewController extends Component
 {
     render()
     {
-        return ( <Table dataSource={dataSource} columns={columns} />)
+        return ( 
+            <div style={{margin:10}}>
+
+                <div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
+                    <h3>分段管理</h3>
+                    <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
+                </div>
+                <Table dataSource={dataSource} columns={columns} />
+            </div>
+        
+        
+    
+    )
     }
 }
 

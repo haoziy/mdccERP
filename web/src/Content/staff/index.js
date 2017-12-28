@@ -2,7 +2,7 @@
  * Created by shenqiao on 2017/12/23.
  */
 
-import {Table} from 'antd'
+import {Table,Button} from 'antd'
 import React, {Component} from 'react'
 import {StaffHandler} from '../../HttpRequest/StaffHandler'
 export  default class StaffViewController extends Component {
@@ -25,7 +25,17 @@ export  default class StaffViewController extends Component {
     }
 
     render() {
-        return ( <Table dataSource={this.state.dataSource} columns={this.state.columns}/>)
+        return ( 
+<div style={{margin:10}}>
+<div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
+                    <h3>员工管理</h3>
+                    <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
+                </div>
+<Table dataSource={this.state.dataSource} columns={this.state.columns}/>
+</div>
+        
+    
+    )
     }
     componentDidMount()
     {
