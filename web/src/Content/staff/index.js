@@ -6,15 +6,14 @@ import {Table,Button,Modal,Input,Alert,message} from 'antd'
 import React, {Component} from 'react'
 import {StaffHandler} from '../../HttpRequest/StaffHandler'
 
-import  {valiedString} from '../../utils'
+import  {valiedString,checkPhone} from '../../utils'
 
 export  default class StaffViewController extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            dataSource: [
-            ],
+            dataSource: [],
             columns: [{
                 title: '姓名',
                 dataIndex: 'staffName',
@@ -23,7 +22,9 @@ export  default class StaffViewController extends Component {
                 title: '电话',
                 dataIndex: 'staffTelephone',
                 key: 'staffTelephone',
-            }]
+            }],
+            staffPhone:null,
+            staffName:null,
         }
     }
     render() {
@@ -40,23 +41,15 @@ export  default class StaffViewController extends Component {
     }
     componentDidMount()
     {
-        this.loadData();
     }
     loadData()
     {
-        // StaffHandler.getAllStaff((data)=>{
-        //     this.setState({
-        //         dataSource:data
-        //     })
-        // },(faile)=>{
-
-        // })
     }
     okClicked()
     {
-        if(valiedString(this.state.staffName,20) && valiedString(this.state.staffPhone,11))
+        if(valiedString(this.state.staffName,20) && checkPhone(this.state.staffPhone))
         {
-            StaffHandler.addStaff({name:this.state.staffName},this.delegate.bind(this),()=>message.error('操作失败'))
+            StaffHandler.addStaff({name:this.state.staffName,telephone:this.state.staffPhone},this.delegate.bind(this),()=>message.error('操作失败'))
             this.setState({visible:false})
         }else{
             message.warning('请输入正确的姓名及电话',1);
