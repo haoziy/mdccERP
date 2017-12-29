@@ -13,7 +13,9 @@ const {
     getAllChannel,
     addChannel
     } = require('./channel')
-
+const  {
+    getAllSegment
+    } = require('./segment')
 const {
     addStaff,
     getAllStaff
@@ -21,10 +23,6 @@ const {
 const {
     addCustomer,
     getAllCustomer,
-    updateCustomerStatus,
-    bindCustomerAndSegment,
-    bindCustomerAndStaff,
-    bindCustomerAndChannel
     } = require('./customer')
 const db = require('./DBConfig')
 const API_MAP = {
@@ -187,6 +185,15 @@ const httCallBack = (req, res)=> {
             break;
         case API_MAP.getAllStaff:
             sqlExecute(getAllStaff(),null, (result)=> {
+                if (result) {
+                    res.send(packageData(STATUS_CODE.SUCCESS, req.path, result))
+                } else {
+                    res.send(packageData(STATUS_CODE.SERVER_ERROR, req.path, null))
+                }
+            })
+            break;
+        case API_MAP.getAllSegment:
+            sqlExecute(getAllSegment(),null, (result)=> {
                 if (result) {
                     res.send(packageData(STATUS_CODE.SUCCESS, req.path, result))
                 } else {

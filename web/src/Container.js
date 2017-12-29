@@ -22,7 +22,7 @@ import {ChannelHandler} from './HttpRequest/ChannelHandler'
 import {SegmentHandler} from './HttpRequest/SegmentHandler'
 const menu = [
     '客户管理',
-    '分段管理',
+    '时段管理',
     '渠道管理',
     '员工管理'
 ]
@@ -94,6 +94,7 @@ export default class Container extends Component {
     loadSegment()
     {
         SegmentHandler.getAllSegment((data)=>{
+            console.log(data)
             this.setState({
                 segment:data
             })
@@ -135,7 +136,7 @@ export default class Container extends Component {
                 break;
             case 2:
                 return (<div>
-                    <SegmentViewController />
+                    <SegmentViewController segment={this.state.segment} delegate={()=>this.loadSegment()} />
                 </div>)
                 break;
             case 3:

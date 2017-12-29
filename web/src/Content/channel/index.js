@@ -45,13 +45,7 @@ export  default class ChannelViewController extends Component
     }
     loadData()
     {
-        //ChannelHandler.getAllChannel((data)=>{
-        //    this.setState({
-        //        dataSource:data
-        //    })
-        //},(faile)=>{
-        //
-        //})
+
     }
     okClicked()
     {
