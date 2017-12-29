@@ -144,7 +144,7 @@ export default class Container extends Component {
                 </div>)
                 break;
             case 4:
-                return (<StaffViewController />)
+                return (<StaffViewController delegate={()=>this.loadChannel()} staff={this.state.staff}/>)
                 break;
             default:
                 return null
