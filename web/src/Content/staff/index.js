@@ -33,7 +33,7 @@ export  default class StaffViewController extends Component {
                     <h3>员工管理</h3>
                     <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
                 </div>
-                <Table dataSource={this.state.dataSource} columns={this.state.columns}/>
+                <Table dataSource={this.props.staff?this.props.staff:[]} columns={this.state.columns}/>
                 {this.model()}
                 </div>
             )

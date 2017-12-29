@@ -16,9 +16,9 @@ export const valiedString = (str,maxLength)=>{
     // }
 
     //判断输入号码是否小于最大号码长度
-    if(phoneNum.length!=maxLength){
-        return false;
-    }
+    // if(phoneNum.length!=maxLength){
+    //     return false;
+    // }
     if(!str)
     {
         return false;

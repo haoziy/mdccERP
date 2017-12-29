@@ -12,7 +12,8 @@ const mysql = require("mysql");
 const pool = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: 'mi168888',
+    // password: 'mi168888',
+    password:'1234',
     port: '3306',
     database: 'MDDB'
 })
