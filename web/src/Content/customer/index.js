@@ -2,9 +2,10 @@
  * Created by shenqiao on 2017/12/23.
  */
 
-import {Table,Button,Modal,Input,Select,Alert} from 'antd'
+import {Table,Button,Modal,Input,Select,Alert,DatePicker} from 'antd'
 import React, {Component} from 'react'
 import {CustomerHandler} from '../../HttpRequest/CustomerHandler'
+const { RangePicker } = DatePicker;
 
 export  default class CustomerViewController extends Component {
 
@@ -79,15 +80,13 @@ export  default class CustomerViewController extends Component {
                     </div>
                     <h5><span>时段</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div style={{marginBottom:5}}>
-                        <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({segment:v})}}>
-                            {
-                                this.props.segment.map((v,i)=>{
-                                    return (
-                                        <Option key={i} value={v}>{v.segmentName}</Option>
-                                    )
-                                })
-                            }
-                        </Select>
+                        
+                    <RangePicker
+                    showTime={{ format: 'HH:mm' }}
+                    format="YYYY-MM-DD HH:mm"
+                    placeholder={['Start Time', 'End Time']}
+                    
+                  />
                     </div>
                     {
                         !this.state.isCanSubmit&&<Alert
