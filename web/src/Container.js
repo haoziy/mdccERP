@@ -24,7 +24,8 @@ const menu = [
     '客户管理',
     '时段管理',
     '渠道管理',
-    '员工管理'
+    '员工管理',
+    '成交客户',
 ]
 
 export default class Container extends Component {
@@ -131,6 +132,7 @@ export default class Container extends Component {
                         staff={this.state.staff?this.state.staff:[]}
                         channel={this.state.channel?this.state.channel:[]}
                         segment={this.state.segment?this.state.segment:[]}
+                        delegate={()=>this.loadCustomer()}
                     />
                 </div>)
                 break;

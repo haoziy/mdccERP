@@ -7,6 +7,7 @@ const {RangePicker } = DatePicker;
 import React, {Component} from 'react'
 import {valiedString} from '../../utils'
 import moment from 'moment'
+import {SegmentHandler } from '../../HttpRequest/SegmentHandler'
 export  default class SegmentViewController extends Component {
 
     constructor(props) {
@@ -48,7 +49,6 @@ export  default class SegmentViewController extends Component {
     render() {
         return (
             <div style={{margin:10}}>
-
                 <div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
                     <h3>时段管理</h3>
                     <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
@@ -60,8 +60,8 @@ export  default class SegmentViewController extends Component {
     }
 
     okClicked() {
-        if (valiedString(this.state.channleName, 20)) {
-            ChannelHandler.AddChannel({name: this.state.channleName}, this.delegate.bind(this), ()=>message.error('操作失败'))
+        if (valiedString(this.state.segmentName, 20)&&this.state.start&&this.state.end) {
+            SegmentHandler.addSegment({start:this.state.start,end:this.state.end,name:this.state.segmentName},()=>this.props.delegate&&this.props.delegate(),()=>{});
             this.setState({visible: false})
         } else {
             message.warning('请输入有效的内容', 1);
@@ -96,7 +96,7 @@ export  default class SegmentViewController extends Component {
                     <Input placeholder="时段名称" style={{marginBottom:5}}
                            onInput={(e)=>this.setState({segmentName:e.target.value})}/>
                     <h5><span>时段名称</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
-                    <RangePicker size={this.state.size} style={{marginBottom:5}} placeholder={['开始日期', '结束日期']}/>
+                    <RangePicker size={this.state.size} style={{marginBottom:5}} placeholder={['开始日期', '结束日期']} onChange = {this.dateOnChange.bind(this)}/>
                     <Alert
                     message="提示"
                     description="带'*'为必填项"
@@ -105,6 +105,13 @@ export  default class SegmentViewController extends Component {
                 </Modal>
             </div>
         )
+    }
+    dateOnChange(x,y,z,q)
+    {
+        this.setState({
+            start:y[0],
+            end:y[1],
+        })
     }
 }
 
