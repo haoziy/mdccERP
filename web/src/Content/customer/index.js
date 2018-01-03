@@ -6,6 +6,8 @@ import {Table,Button,Modal,Input,Select,Alert,message} from 'antd'
 import React, {Component} from 'react'
 import {CustomerHandler} from '../../HttpRequest/CustomerHandler'
 import {checkPhone,valiedString} from '../../utils'
+import ExportJsonExcel from 'js-export-excel'
+import moment from 'moment'
 
 export  default class CustomerViewController extends Component {
 
@@ -41,6 +43,7 @@ export  default class CustomerViewController extends Component {
                 title: '来访目的',
                 dataIndex: 'intention',
                 intention: 'intention',
+                key: 'intention',
                 render: (x,y,z)=>x?x:'-',
             },{
                 title: '成交状态',
@@ -216,16 +219,56 @@ export  default class CustomerViewController extends Component {
             <div style={{margin:10}}>
                 <div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
                     <h3>意向客户列表</h3>
-                    <Button type="primary" onClick={()=>this.setState({visible:true})}>添加</Button>
+                    <div>
+                        <Button type="primary" onClick={()=>this.setState({visible:true})} style={{marginRight:30}}>添加</Button>
+                        <Button type="primary" onClick={this.exportExcel.bind(this)} style={{marginRight:30}}>导出excel</Button>
+                    </div>
+
                 </div>
-                <Table dataSource={this.props.customer} columns={this.state.columns}/>
+                <Table dataSource={this.props.customer} columns={this.state.columns} style={{marginRight:0}}/>
                 {this.model()}
                 {this.modifyModel()}
             </div>
 
         )
     }
+    exportExcel()
+    {
+        var option={};
 
+        option.fileName = moment(new Date()).format('YYYY-MM-DD-HH-mm-ss')
+        let keys = this.state.columns.map((v)=>v.key);
+        let datas =  this.props.customer.map((v)=>{
+            let arr = [];
+            keys.map((k,i)=>{
+                if(k=='status')
+                {
+                    arr.push(v[k]==0?'未成交':'已成交');
+                }else
+                {
+                    arr.push(v[k])
+                }
+            })
+            return arr;
+
+        })
+        option.datas=[
+            {
+                //sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}],
+                sheetData:datas,
+                sheetName:'sheet',
+                //sheetFilter:['two','one'],
+                sheetHeader:this.state.columns.map((v)=>v.title)
+            },
+            {
+                sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]
+            }
+        ];
+
+        console.log(option);
+        var toExcel = new ExportJsonExcel(option); //new
+        toExcel.saveExcel(); //保存
+    }
     componentDidMount() {
         //this.loadData();
     }
