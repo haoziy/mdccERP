@@ -37,6 +37,18 @@ const  updateCustomerStatus = ()=>{
     return "UPDATE table_customer A SET A.customer_deal_state = ? WHERE A.customer_id = ?";
 }
 
+const bingCustomerAndInviter = ()=>{
+    return "INSERT INTO table_inviter_customer_binding " +
+        "(`binding_id`, `staff_id`, `customer_id`) " +
+        " VALUES(?,?,?)";
+}
+const bingCustomerAndDealer= ()=>{
+    return "INSERT INTO table_dealer_customer_binding " +
+        "(`binding_id`, `staff_id`, `customer_id`) " +
+        " VALUES(?,?,?)";
+}
+
+
 const addCustomer = ()=>{
     return "INSERT INTO table_customer" +
         "(customer_id,customer_name,customer_telephone,customer_intention,customer_create_time,customer_deal_state,customer_avtive) " +
@@ -63,5 +75,7 @@ module.exports = {
     updateCustomerStatus,
     bindCustomerAndSegment,
     bindCustomerAndStaff,
-    bindCustomerAndChannel
+    bindCustomerAndChannel,
+    bingCustomerAndInviter,
+    bingCustomerAndDealer
 }

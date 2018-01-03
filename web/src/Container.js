@@ -25,7 +25,7 @@ const menu = [
     '时段管理',
     '渠道管理',
     '员工管理',
-    '成交客户',
+    '目标达成',
 ]
 
 export default class Container extends Component {
@@ -55,8 +55,6 @@ export default class Container extends Component {
                  </div>
                 <Buttom style={{alignSelf:'flex-end',display:'flex'}}/>
             </div>
-
-
         )
     }
     menuPart() {
