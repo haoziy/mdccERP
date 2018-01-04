@@ -52,14 +52,13 @@ export  default class CustomerViewController extends Component {
             },{
                 title: '成交人',
                 dataIndex: 'dealer',
-                intention: 'dealer',
                 key: 'dealer',
                 render: (x,y,z)=>x?x:'-',
             },{
-                title: '成交时间',
-                dataIndex: 'dealTime',
-                intention: 'dealTime',
-                key: 'dealTime',
+                title: '成交时段',
+                dataIndex: 'segment',
+                intention: 'segment',
+                key: 'segment',
                 render: (x,y,z)=>x?x:'-',
             },
                 {
