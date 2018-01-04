@@ -16,6 +16,7 @@ import CustomerViewController from './Content/customer'
 import ChannelViewController from './Content/channel'
 import SegmentViewController from './Content/segment'
 import StaffViewController from './Content/staff'
+import StatisticsViewController from './Content/statistics'
 import {CustomerHandler} from './HttpRequest/CustomerHandler'
 import {StaffHandler} from './HttpRequest/StaffHandler'
 import {ChannelHandler} from './HttpRequest/ChannelHandler'
@@ -147,6 +148,13 @@ export default class Container extends Component {
             case 4:
                 return (<StaffViewController delegate={()=>this.loadStaff()} staff={this.state.staff}/>)
                 break;
+            case 5:
+                return (<StatisticsViewController delegate={()=>this.loadStaff()}
+                                                  staff={this.state.staff?this.state.staff:[]}
+                                                  channel={this.state.channel?this.state.channel:[]}
+                                                  segment={this.state.segment?this.state.segment:[]}/>)
+                break;
+
             default:
                 return null
         }
