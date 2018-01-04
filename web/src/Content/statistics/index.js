@@ -44,7 +44,7 @@ export  default class StatisticsViewController extends Component {
                                 {
                                     this.props.channel.map((v, j)=> {
                                         return (
-                                            <Option key={i} value={v}>{v.channelName}</Option>
+                                            <Option key={j} value={v}>{v.channelName}</Option>
                                         )
                                     })
                                 }
