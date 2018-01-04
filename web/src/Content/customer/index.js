@@ -42,10 +42,26 @@ export  default class CustomerViewController extends Component {
             }, {
                 title: '来访目的',
                 dataIndex: 'intention',
-                intention: 'intention',
                 key: 'intention',
                 render: (x,y,z)=>x?x:'-',
             },{
+                title: '约访人',
+                dataIndex: 'inviter',
+                key: 'inviter',
+                render: (x,y,z)=>x?x:'-',
+            },{
+                title: '成交人',
+                dataIndex: 'dealer',
+                key: 'dealer',
+                render: (x,y,z)=>x?x:'-',
+            },{
+                title: '成交时段',
+                dataIndex: 'segment',
+                intention: 'segment',
+                key: 'segment',
+                render: (x,y,z)=>x?x:'-',
+            },
+                {
                 title: '成交状态',
                 dataIndex: 'status',
                 key: 'status',
@@ -66,6 +82,7 @@ export  default class CustomerViewController extends Component {
             staffForDeal:null,
             segmentForDeal:null,
             customerId:null,
+            inviter:null,
         }
     }
     deal(x,y,z)
@@ -95,14 +112,17 @@ export  default class CustomerViewController extends Component {
     }
     dealClick()
     {
-        const {staffForDeal,segmentForDeal} = this.state;
-        if(staffForDeal&&segmentForDeal)
+        const {staffForDeal,segmentForDeal,inviter} = this.state;
+        if(staffForDeal&&segmentForDeal,inviter)
         {
             let param = {
                 id:this.state.customerId,
+                inviter:inviter.staffId,
+                staffForDeal:staffForDeal.staffId,
+                segmentForDeal:segmentForDeal.segmentId,
                 status:1,
             }
-            CustomerHandler.updateCustomer(param,()=>{console.log('老米');if(this.props.delegate){this.props.delegate()}},()=>{});
+            CustomerHandler.updateCustomer(param,()=>{if(this.props.delegate){this.props.delegate()}},()=>{});
             this.setState({modifyStatus:false})
         }else {
             message.warning('请选择有效的内容',1);
@@ -120,6 +140,18 @@ export  default class CustomerViewController extends Component {
                 >
 
 
+                    <h5><span>约访人</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
+                    <div>
+                        <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({inviter:v})}}>
+                            {
+                                this.props.staff.map((v,i)=>{
+                                    return (
+                                        <Option key={i} value={v}>{v.staffName}</Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    </div>
                     <h5><span>成交人</span><span style={{color:'#f00',fontSize:'14px'}}>&nbsp;*</span></h5>
                     <div>
                         <Select  style={{ width: 240 }} onChange={(v)=>{this.setState({staffForDeal:v})}}>
@@ -205,7 +237,7 @@ export  default class CustomerViewController extends Component {
                     <Input placeholder="来访目的" name="customerName" onInput={(e)=>this.setState({intention:e.target.value})}/>
                     <Alert
                         message="提示"
-                        description="带'※'为必填项"
+                        description="带'*'为必填项"
                         type="warning"
                     />
 
@@ -220,8 +252,8 @@ export  default class CustomerViewController extends Component {
                 <div style={{flexDirection:'row',justifyContent:'space-between',display:'flex'}}>
                     <h3>意向客户列表</h3>
                     <div>
-                        <Button type="primary" onClick={()=>this.setState({visible:true})} style={{marginRight:30}}>添加</Button>
-                        <Button type="primary" onClick={this.exportExcel.bind(this)} style={{marginRight:30}}>导出excel</Button>
+                        <Button type="primary" onClick={()=>this.setState({visible:true})} style={{marginRight:10}}>添加</Button>
+                        <Button type="primary" onClick={this.exportExcel.bind(this)}>导出excel</Button>
                     </div>
 
                 </div>
