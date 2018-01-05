@@ -10,7 +10,10 @@ export default class SignIn extends Component {
       password: null
     }
   }
-  //用户判断 userCheck(event){   this.userName = event.target.value; }
+  //管理人员判断 
+  handleChange(e){
+    let {name,psd} = event.target.value;
+    }
   render() {
     return (
       <div style={{
