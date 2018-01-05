@@ -93,10 +93,5 @@ CREATE TABLE IF NOT EXISTS `table_segment_customer_binding` (
   PRIMARY KEY (`binding_id`)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---建立管理员表
-CREATE TABLE IF NOT EXITS `table_user`(
-  `user_id ` VARCHAR(11) NOT NULL,
-  `user_name` VARCHAR(11) NOT NULL,
-  `user_psd` VARCHAR(6) NOT NULL,
-  PRIMARY KEY (`user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
