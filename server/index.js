@@ -32,6 +32,12 @@ const {
     bingCustomerAndDealer
 
     } = require('./customer')
+
+const {
+    isAdmin,
+    addAdmin
+} = require('./user')
+
 const db = require('./DBConfig')
 const API_MAP = {
     //用户相关
@@ -55,6 +61,12 @@ const API_MAP = {
 
     addTimeSegment: '/segment/addSegment',//添加时段
     getAllSegment: '/segment/getAllSegment',//获取时段
+
+    
+    //验证管理员登录
+    isAdmin:'/user/isAdmin',
+    addAdmin:'/user/addAdmin'
+
 }
 const STATUS_CODE = {
     SUCCESS: 0,//成功回调
@@ -76,6 +88,7 @@ const HTTPMETHOD = {
     GET: 'GET',
     POST: 'POST',
 }
+
 
 const getCallBack = (req, res)=> {
     httCallBack(req, res);
