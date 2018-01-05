@@ -10,6 +10,7 @@ const API_MAP = {
     updateCustomerStatus: '/customer/updateCustomerStatus',//更新用户状态
     deleteCustomer: '/customer/deleteCustomer',//删除用户
     getAllCustomer: '/customer/getAllCustomer',//获取所有用户
+    checkCustomerPhone: '/customer/checkPhone',//验证号码是否已经存在
 
     //渠道相关
     addChannel: '/channel/addChannel',//添加渠道

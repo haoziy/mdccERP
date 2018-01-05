@@ -9,6 +9,7 @@ const getAllCustomer = ()=>
 	A.customer_name as name,
 	A.customer_telephone as phone,
 	A.customer_deal_state as status,
+	A.customer_times as times,
 	DATE_FORMAT(A.customer_create_time,'%Y-%m-%d') as date,
 	A.customer_intention as intention,
 	C.staff_name as staff,
