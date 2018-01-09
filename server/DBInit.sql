@@ -92,3 +92,6 @@ CREATE TABLE IF NOT EXISTS `table_segment_customer_binding` (
   `segment_id` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`binding_id`)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+

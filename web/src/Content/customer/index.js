@@ -190,7 +190,6 @@ export  default class CustomerViewController extends Component {
     {
         if(checkPhone(this.state.customerPhone))
         {
-            //CustomerHandler.
         }else {
             message.warning('请输入有效的电话号码',1);
         }

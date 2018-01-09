@@ -26,6 +26,10 @@ const API_MAP = {
 
     addTimeSegment: '/segment/addSegment',//添加时段
     getAllSegment: '/segment/getAllSegment',//获取时段
+
+    //验证用户登录
+    isAdmin: '/user/isAdmin',
+    addAdmin: '/user/addAdmin'
 }
 const BaseHandler = {
     baseURL:'http://localhost:9527',
